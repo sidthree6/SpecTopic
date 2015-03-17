@@ -49,6 +49,9 @@
      <Compile Include="Assets\MentalFlexibility\Scripts\GameController.cs" />
      <Compile Include="Assets\MentalFlexibility\Scripts\NewBehaviourScript.cs" />
      <Compile Include="Assets\MentalFlexibility\Scripts\SelectionPanel.cs" />
+     <Compile Include="Assets\Scripts\Bush.cs" />
+     <Compile Include="Assets\Scripts\Player.cs" />
+     <Compile Include="Assets\Scripts\soundManager.cs" />
      <None Include="Assets\Standard Assets (Mobile)\Shaders\Particle Shaders\Mobile Multiply Culled.shader" />
      <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Basic.shader" />
      <None Include="Assets\Standard Assets (Mobile)\Shaders\Miscellaneous Shaders\Mobile Background.shader" />
