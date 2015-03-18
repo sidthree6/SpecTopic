@@ -20,10 +20,13 @@ public class Player : MonoBehaviour {
 	}
 
     void ButtonPress() {
-        if (Input.GetKeyDown(KeyCode.Space) && hitBush)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            CurrentBush.AnimalFound();
+            if (hitBush){
+                     CurrentBush.AnimalFound();
             hitBush = false;
+            }
+
         }
     }
 
@@ -41,7 +44,8 @@ public class Player : MonoBehaviour {
         //Debug.Log(hit.name);
         if (hit.gameObject.tag == "Bush")
         {
-            hitBush = false;
+            //Debug.Log("exiting");
+            //hitBush = false;
             //Destroy(hit.gameObject);
         }
     }
