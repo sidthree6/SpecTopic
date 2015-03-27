@@ -13,7 +13,7 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Vector3 Velocity = new Vector3( 0.1f*movementSpeed*Time.deltaTime, 0, 0);
+        Vector3 Velocity = new Vector3( movementSpeed*Time.deltaTime, 0, 0);
         this.transform.position = this.transform.position + Velocity;
 
         ButtonPress();

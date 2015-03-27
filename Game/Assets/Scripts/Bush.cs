@@ -44,4 +44,12 @@ public class Bush : MonoBehaviour {
         Debug.Log("AnimalFound");
         Image.enabled = false;
     }
+
+    public void f_SetAnimal(Sprite Animal)
+    {
+        if (Image==null)
+            Image = this.transform.FindChild("Animal").GetComponent<SpriteRenderer>();
+        Image.sprite = Animal;
+
+    }
 }

@@ -64,6 +64,7 @@
     <Compile Include="Assets\MentalFlexibility\Scripts\NewBehaviourScript.cs" />
     <Compile Include="Assets\MentalFlexibility\Scripts\SelectionPanel.cs" />
     <Compile Include="Assets\Scripts\Bush.cs" />
+    <Compile Include="Assets\Scripts\BushManager.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\soundManager.cs" />
     <None Include="Assets\Standard Assets (Mobile)\Shaders\Lightmap Shaders (Legacy)\Mobile Lightmap AlphaTest.shader" />
