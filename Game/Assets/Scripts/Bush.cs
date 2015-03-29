@@ -41,7 +41,7 @@ public class Bush : MonoBehaviour {
 
     public void AnimalFound()
     {
-        //Debug.Log("AnimalFound");
+        Debug.Log("AnimalFound");
         Image.enabled = false;
     }
 
