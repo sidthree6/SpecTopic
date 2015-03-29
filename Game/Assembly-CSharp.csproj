@@ -51,7 +51,9 @@
      <Compile Include="Assets\MentalFlexibility\Scripts\SelectionPanel.cs" />
      <Compile Include="Assets\Scripts\Bush.cs" />
      <Compile Include="Assets\Scripts\BushManager.cs" />
+     <Compile Include="Assets\Scripts\CSVExporter.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
+     <Compile Include="Assets\Scripts\PlayerRecorder.cs" />
      <Compile Include="Assets\Scripts\soundManager.cs" />
      <None Include="Assets\Standard Assets (Mobile)\Shaders\Particle Shaders\Mobile Multiply Culled.shader" />
      <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Basic.shader" />
