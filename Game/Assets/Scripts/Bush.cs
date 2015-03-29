@@ -50,6 +50,10 @@ public class Bush : MonoBehaviour {
         if (Image==null)
             Image = this.transform.FindChild("Animal").GetComponent<SpriteRenderer>();
         Image.sprite = Animal;
-
+        //reset the sprite 
+        Color tempColor = new Color(Image.color.r, Image.color.g, Image.color.b, 0.0f);
+        Image.color = tempColor;
+        AlphaFade = 0.0f;
+        Image.enabled = true;
     }
 }

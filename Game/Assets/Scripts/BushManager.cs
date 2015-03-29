@@ -21,7 +21,7 @@ public class BushManager : MonoBehaviour {
 	
 	}
 
-    void f_ResettingBushes()
+    public void f_ResettingBushes()
     {
         bool set=false;
         int RightSet=0,WrongSet=0,RandomNumber;
