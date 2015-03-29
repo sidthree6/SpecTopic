@@ -3,13 +3,14 @@ using System.Collections;
 
 public class Bush : MonoBehaviour {
     public bool Fox;
-    bool FadeIn;
-    float AlphaFade;
+    bool FadeIn,FadeOut,BushUsed;
+    float AlphaFade,StartTime;
     SpriteRenderer Image;
     soundManager SoundMan;
 	// Use this for initialization
 	void Start () {
         AlphaFade = 0;
+        BushUsed = false;
         FadeIn = false;
         Image = this.transform.FindChild("Animal").GetComponent<SpriteRenderer>();
         SoundMan = GameObject.FindGameObjectWithTag("Sound").GetComponent<soundManager>();
@@ -20,11 +21,20 @@ public class Bush : MonoBehaviour {
         if (FadeIn)
         {
             SoundMan.playSound(1);
-            AlphaFade += 0.05f;
+            AlphaFade += 0.08f;
             Color tempColor= new Color (Image.color.r,Image.color.g,Image.color.b,AlphaFade);
             Image.color = tempColor;
             if (AlphaFade > 1)
                 FadeIn = false;
+        }
+
+        if (FadeOut)
+        {
+            AlphaFade -= 0.08f;
+            Color tempColor = new Color(Image.color.r, Image.color.g, Image.color.b, AlphaFade);
+            Image.color = tempColor;
+            if (AlphaFade < 0)
+                FadeOut = false;
         }
 	}
 
@@ -35,17 +45,48 @@ public class Bush : MonoBehaviour {
         if (hit.gameObject.tag == "Player")
         {
             FadeIn = true;
+            StartTime = Time.time;
+            AlphaFade = 0;
+            if (!Fox)
+                Player.CurrentCats++;
+            else
+                Player.CurrentFox++;
             //Image.enabled = true;
         }
     }
 
-    public void AnimalFound()
+    void OnTriggerExit(Collider hit)
     {
-        Debug.Log("AnimalFound");
-        Image.enabled = false;
+
+        //Debug.Log(hit.name);
+        if (hit.gameObject.tag == "Player")
+        {
+            FadeOut = true;
+            StartTime = Time.time;
+            AlphaFade = 1.0f;
+            CheckMissedBush();
+            //Image.enabled = true;
+        }
     }
 
-    public void f_SetAnimal(Sprite Animal)
+    void CheckMissedBush()
+    {
+        if (!Fox&&!BushUsed)
+            Player.MissedCats++;
+    }
+
+    public void f_AnimalFound()
+    {
+        //Debug.Log("AnimalFound");
+        Image.enabled = false;
+        BushUsed = true;
+    }
+
+    /// <summary>
+    /// reseting function for the bush 
+    /// </summary>
+    /// <param name="Animal"></param>
+    public void f_resetBush(Sprite Animal)
     {
         if (Image==null)
             Image = this.transform.FindChild("Animal").GetComponent<SpriteRenderer>();
@@ -55,5 +96,12 @@ public class Bush : MonoBehaviour {
         Image.color = tempColor;
         AlphaFade = 0.0f;
         Image.enabled = true;
+
+        BushUsed = false;
+    }
+
+    public float f_returnTime()
+    {
+        return StartTime;
     }
 }

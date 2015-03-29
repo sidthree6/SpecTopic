@@ -36,14 +36,14 @@ public class BushManager : MonoBehaviour {
             {
                 if (RandomNumber >= 5 && Rightmax >= RightSet)
                 {// cat= right 
-                    AllBushes[i].f_SetAnimal(Cat);
+                    AllBushes[i].f_resetBush(Cat);
                     AllBushes[i].Fox = false;
                     RightSet++;
                     set = true;
                 }
                 else if (WrongMax >= WrongSet)
                 {
-                    AllBushes[i].f_SetAnimal(Fox);
+                    AllBushes[i].f_resetBush(Fox);
                     AllBushes[i].Fox = true;
                     WrongSet++;
                     set = true;

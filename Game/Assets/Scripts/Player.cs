@@ -5,6 +5,8 @@ using System.Collections;
 public class Player : MonoBehaviour {
     public float movementSpeed;
 
+    public static int MissedCats,CurrentCats;// calculating ommision error 
+    public static int HitFox,CurrentFox;// calculating commision error 
     private int overallCorrect,currentCorrect,currentRound;
     private Text RoundNum, Score;
     private Vector3 Velocity;
@@ -13,9 +15,16 @@ public class Player : MonoBehaviour {
     private RawImage LevelComplete;
     private BushManager BushMan;
     private GameObject ResetButton;
+    private float[] MeanReactionTime;
 
 	// Use this for initialization
 	void Start () {
+        CurrentCats = 0;
+        MissedCats = 0;
+        CurrentFox = 0;
+        HitFox = 0;
+        MeanReactionTime = new float[120];
+
         moving = true;
         hitBush = false;
         overallCorrect = 0;
@@ -56,12 +65,14 @@ public class Player : MonoBehaviour {
 
     void BushCheck()
     {
-        CurrentBush.AnimalFound();
-        if (!CurrentBush.Fox)
-            currentCorrect++;
+        float BushTime=Time.time-CurrentBush.f_returnTime();
+        Debug.Log(BushTime + "=Bush Timer");
+        CurrentBush.f_AnimalFound();
+        if (CurrentBush.Fox)
+            HitFox++;
 
         RoundNum.text = "Round = " + currentRound;
-        Score.text = "Correct Kittens:" + currentCorrect;
+        Score.text = "Correct Kittens:" + (CurrentCats - MissedCats);
     }
 
     void OnTriggerEnter(Collider hit)
@@ -78,6 +89,8 @@ public class Player : MonoBehaviour {
             overallCorrect += currentCorrect;
             LevelComplete.enabled = true;
             ResetButton.SetActive(true);
+            Debug.Log("Fox "+ HitFox+ " vs "+ CurrentFox);
+            Debug.Log("cat "+MissedCats + " vs "+CurrentCats);
         }
     }
     void OnTriggerExit(Collider hit)
@@ -93,6 +106,12 @@ public class Player : MonoBehaviour {
 
     public void f_resetGame()
     {
+        //MeanReactionTime = 0;
+        CurrentCats = 0;
+        MissedCats = 0;
+        CurrentFox = 0;
+        HitFox = 0;
+
         currentCorrect = 0;
         currentRound++;
         RoundNum.text = "Round = " + currentRound;
