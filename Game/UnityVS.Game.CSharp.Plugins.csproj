@@ -78,6 +78,8 @@
     <None Include="Assets\Subject10.txt" />
     <None Include="Assets\Subject11.txt" />
     <None Include="Assets\Subject12.txt" />
+    <None Include="Assets\Subject13.txt" />
+    <None Include="Assets\Subject14.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2013\UnityVS.CSharp.targets" />
 </Project>

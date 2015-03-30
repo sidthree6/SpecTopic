@@ -15,7 +15,7 @@ public class Player : MonoBehaviour {
     private RawImage LevelComplete;
     private BushManager BushMan;
     private GameObject ResetButton;
-    private float[] MeanReactionTime;
+    private MeanReactionTime AvgReactTime;
 
 	// Use this for initialization
 	void Start () {
@@ -23,7 +23,6 @@ public class Player : MonoBehaviour {
         MissedCats = 0;
         CurrentFox = 0;
         HitFox = 0;
-        MeanReactionTime = new float[120];
 
         moving = true;
         hitBush = false;
@@ -41,6 +40,8 @@ public class Player : MonoBehaviour {
         RoundNum.text = "Round = " + currentRound;
         Score.text = "Correct Kittens:" + currentCorrect;
 
+        AvgReactTime = new MeanReactionTime();
+        AvgReactTime.Reset();
 	}
 	
 	// Update is called once per frame
@@ -66,7 +67,8 @@ public class Player : MonoBehaviour {
     void BushCheck()
     {
         float BushTime=Time.time-CurrentBush.f_returnTime();
-        Debug.Log(BushTime + "=Bush Timer");
+        //Debug.Log(BushTime + "=Bush Timer");
+        AvgReactTime.AddReactionTime(BushTime);
         CurrentBush.f_AnimalFound();
         if (CurrentBush.Fox)
             HitFox++;
@@ -89,8 +91,9 @@ public class Player : MonoBehaviour {
             overallCorrect += currentCorrect;
             LevelComplete.enabled = true;
             ResetButton.SetActive(true);
+            Debug.Log("Avg RT=" + AvgReactTime.returnAverageReactionTime());
             Debug.Log("Fox "+ HitFox+ " vs "+ CurrentFox);
-            Debug.Log("cat "+MissedCats + " vs "+CurrentCats);
+            Debug.Log("Missed cats "+MissedCats + " vs "+CurrentCats);
         }
     }
     void OnTriggerExit(Collider hit)
@@ -106,7 +109,6 @@ public class Player : MonoBehaviour {
 
     public void f_resetGame()
     {
-        //MeanReactionTime = 0;
         CurrentCats = 0;
         MissedCats = 0;
         CurrentFox = 0;
@@ -121,4 +123,5 @@ public class Player : MonoBehaviour {
         ResetButton.SetActive(false);
         BushMan.f_ResettingBushes();
     }
+
 }

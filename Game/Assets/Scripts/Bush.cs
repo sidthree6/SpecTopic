@@ -7,6 +7,7 @@ public class Bush : MonoBehaviour {
     float AlphaFade,StartTime;
     SpriteRenderer Image;
     soundManager SoundMan;
+    BushManager BushMan;
 	// Use this for initialization
 	void Start () {
         AlphaFade = 0;
@@ -14,6 +15,7 @@ public class Bush : MonoBehaviour {
         FadeIn = false;
         Image = this.transform.FindChild("Animal").GetComponent<SpriteRenderer>();
         SoundMan = GameObject.FindGameObjectWithTag("Sound").GetComponent<soundManager>();
+        BushMan = GameObject.Find("BushManager").GetComponent<BushManager>();
 	}
 	
 	// Update is called once per frame
@@ -47,10 +49,8 @@ public class Bush : MonoBehaviour {
             FadeIn = true;
             StartTime = Time.time;
             AlphaFade = 0;
-            if (!Fox)
-                Player.CurrentCats++;
-            else
-                Player.CurrentFox++;
+
+            SetAnimal();
             //Image.enabled = true;
         }
     }
@@ -86,22 +86,45 @@ public class Bush : MonoBehaviour {
     /// reseting function for the bush 
     /// </summary>
     /// <param name="Animal"></param>
-    public void f_resetBush(Sprite Animal)
+    public void f_resetBush()
     {
-        if (Image==null)
-            Image = this.transform.FindChild("Animal").GetComponent<SpriteRenderer>();
-        Image.sprite = Animal;
+
         //reset the sprite 
         Color tempColor = new Color(Image.color.r, Image.color.g, Image.color.b, 0.0f);
         Image.color = tempColor;
         AlphaFade = 0.0f;
         Image.enabled = true;
-
         BushUsed = false;
+    }
+
+    public void f_setAnimal(Sprite Animal)
+    {
+        if (Image == null)
+            Image = this.transform.FindChild("Animal").GetComponent<SpriteRenderer>();
+        Image.sprite = Animal;
     }
 
     public float f_returnTime()
     {
         return StartTime;
+    }
+
+    void SetAnimal() {
+        int RandomNumber= Random.Range(0, 100);
+        Debug.Log(RandomNumber + "Random Number");
+        if (RandomNumber <= BushManager.KittenPercent )
+        {// cat= right 
+            f_setAnimal(BushMan.Cat);
+            Fox = false;
+            Player.CurrentCats++;
+            //Debug.Log(RandomNumber+ "set cat");
+        }
+        else 
+        {
+            f_setAnimal(BushMan.Fox);
+            Fox = true;
+            Player.CurrentFox++;
+        }
+
     }
 }

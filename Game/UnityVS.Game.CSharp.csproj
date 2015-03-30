@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\Bush.cs" />
     <Compile Include="Assets\Scripts\BushManager.cs" />
     <Compile Include="Assets\Scripts\CSVExporter.cs" />
+    <Compile Include="Assets\Scripts\MeanReactionTime.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\PlayerRecorder.cs" />
     <Compile Include="Assets\Scripts\soundManager.cs" />
@@ -95,6 +96,8 @@
     <None Include="Assets\Subject10.txt" />
     <None Include="Assets\Subject11.txt" />
     <None Include="Assets\Subject12.txt" />
+    <None Include="Assets\Subject13.txt" />
+    <None Include="Assets\Subject14.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2013\UnityVS.CSharp.targets" />
 </Project>
