@@ -55,10 +55,12 @@ public class CSVExporter : MonoBehaviour
     /// </summary>
     private void initializeFirstLine()
     {// start the first line 
-        addToLine("Time(s)", 0);
-        addToLine("Expected", 1);
-        addToLine("Actual", 2);
-        addToLine("Other Time", 3);
+        addToLine("Time(seconds)", 0);
+        addToLine("Stimulant #", 1);
+        addToLine("Mean reaction time", 2);
+        addToLine("% omission errors", 3);
+        addToLine("% comission errors", 4);
+        addToLine("% Go Trail", 5);
         addToLine("Details", DetailsLine);
         ExportAllLines();
     }

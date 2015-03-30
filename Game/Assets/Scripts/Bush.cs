@@ -8,6 +8,7 @@ public class Bush : MonoBehaviour {
     SpriteRenderer Image;
     soundManager SoundMan;
     BushManager BushMan;
+    Player Playa;
 	// Use this for initialization
 	void Start () {
         AlphaFade = 0;
@@ -16,6 +17,7 @@ public class Bush : MonoBehaviour {
         Image = this.transform.FindChild("Animal").GetComponent<SpriteRenderer>();
         SoundMan = GameObject.FindGameObjectWithTag("Sound").GetComponent<soundManager>();
         BushMan = GameObject.Find("BushManager").GetComponent<BushManager>();
+        Playa = GameObject.Find("Player").GetComponent<Player>();
 	}
 	
 	// Update is called once per frame
@@ -110,6 +112,9 @@ public class Bush : MonoBehaviour {
     }
 
     void SetAnimal() {
+        Playa.f_UpdateScore();
+        Playa.f_CheckPercent();
+
         int RandomNumber= Random.Range(0, 100);
         Debug.Log(RandomNumber + "Random Number");
         if (RandomNumber <= BushManager.KittenPercent )
