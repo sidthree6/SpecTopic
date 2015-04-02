@@ -116,7 +116,7 @@ public class Bush : MonoBehaviour {
         Playa.f_CheckPercent();
 
         int RandomNumber= Random.Range(0, 100);
-        Debug.Log(RandomNumber + "Random Number");
+        //Debug.Log(RandomNumber + "Random Number");
         if (RandomNumber <= BushManager.KittenPercent )
         {// cat= right 
             f_setAnimal(BushMan.Cat);

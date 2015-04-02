@@ -6,7 +6,7 @@ public class soundManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         SceneSounds = new AudioClip[3];
-        SceneSounds[0] = Resources.Load("foliage_crackle_lite") as AudioClip;
+        SceneSounds[0] = Resources.Load("foliage_crackle") as AudioClip;
 	}
 	
 	// Update is called once per frame
