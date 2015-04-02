@@ -1,7 +1,9 @@
 fileFormatVersion: 2
-guid: 1bf47c89e18727d45a3a3cc4d73a9c50
+guid: c79671add6f810a42a4280b6e77fabac
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: slider_0
+    21300002: slider_1
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -25,13 +27,13 @@ TextureImporter:
   maxTextureSize: 1024
   textureSettings:
     filterMode: -1
-    aniso: -1
+    aniso: 16
     mipBias: -1
-    wrapMode: -1
+    wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -42,6 +44,26 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: slider_0
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 18
+        width: 50
+        height: 478
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: slider_1
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 240
+        width: 210
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
