@@ -44,7 +44,7 @@ public class MeanReactionTime : MonoBehaviour {
                 return (float)(ReturningAverage / Count);
             ReturningAverage += avgReationTime[i];
             Count++;
-            Debug.Log("At Count=" + Count + " ReturningAverage=" + ReturningAverage);
+            //Debug.Log("At Count=" + Count + " ReturningAverage=" + ReturningAverage);
         }
         return (float)(ReturningAverage / Count);
     }

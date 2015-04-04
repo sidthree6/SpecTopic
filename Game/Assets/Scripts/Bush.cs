@@ -9,6 +9,8 @@ public class Bush : MonoBehaviour {
     soundManager SoundMan;
     BushManager BushMan;
     Player Playa;
+    PlayerRecorder TextRecorder;
+    CSVExporter ExcelExporter;
 	// Use this for initialization
 	void Start () {
         AlphaFade = 0;
@@ -18,6 +20,10 @@ public class Bush : MonoBehaviour {
         SoundMan = GameObject.FindGameObjectWithTag("Sound").GetComponent<soundManager>();
         BushMan = GameObject.Find("BushManager").GetComponent<BushManager>();
         Playa = GameObject.Find("Player").GetComponent<Player>();
+
+        GameObject RecordObj = GameObject.FindGameObjectWithTag("Recorder");
+        TextRecorder = RecordObj.GetComponent<PlayerRecorder>();
+        ExcelExporter = RecordObj.GetComponent<CSVExporter>();
 	}
 	
 	// Update is called once per frame
@@ -73,8 +79,16 @@ public class Bush : MonoBehaviour {
 
     void CheckMissedBush()
     {
-        if (!Fox&&!BushUsed)
+        if (!Fox && !BushUsed)
+        {
+            int cat = 1;
             Player.MissedCats++;
+            ExcelExporter.addOnDetail("Miseed Cat", 6);
+            ExcelExporter.addOnDetail(cat.ToString(), 3);
+            ExcelExporter.addOnDetail((Player.CurrentCats + Player.CurrentFox).ToString(), 1);
+            ExcelExporter.ExportAllLines(TextRecorder.returnTime());
+        }
+            
     }
 
     public void f_AnimalFound()

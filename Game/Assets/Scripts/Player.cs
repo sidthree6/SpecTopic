@@ -74,11 +74,26 @@ public class Player : MonoBehaviour {
     void BushCheck()
     {
         float BushTime=Time.time-CurrentBush.f_returnTime();
+        int cat = 0;
+        string BrushMessage = "";
         //Debug.Log(BushTime + "=Bush Timer");
         AvgReactTime.AddReactionTime(BushTime);
         CurrentBush.f_AnimalFound();
         if (CurrentBush.Fox)
+        {
+            BrushMessage = "found a fox";
             HitFox++;
+            cat++;
+        }
+        else
+            BrushMessage = "found a Cat";
+
+
+        ExcelExporter.addOnDetail(BrushMessage, 6);
+        ExcelExporter.addOnDetail(cat.ToString(), 4);
+        ExcelExporter.addOnDetail(BushTime.ToString(), 2);
+        ExcelExporter.addOnDetail((CurrentCats + CurrentFox).ToString(), 1);
+        ExcelExporter.ExportAllLines(TextRecorder.returnTime());
 
         f_UpdateScore();
     }
