@@ -1,16 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Bush : MonoBehaviour {
-    public bool Fox;
+    public bool Fox, Tutorial;
     bool FadeIn,FadeOut,BushUsed;
     float AlphaFade,StartTime;
-    SpriteRenderer Image;
+    SpriteRenderer Image,SpaceBar;
     soundManager SoundMan;
     BushManager BushMan;
     Player Playa;
     PlayerRecorder TextRecorder;
     CSVExporter ExcelExporter;
+    TutorialManager TutMan;
 	// Use this for initialization
 	void Start () {
         AlphaFade = 0;
@@ -20,6 +22,12 @@ public class Bush : MonoBehaviour {
         SoundMan = GameObject.FindGameObjectWithTag("Sound").GetComponent<soundManager>();
         BushMan = GameObject.Find("BushManager").GetComponent<BushManager>();
         Playa = GameObject.Find("Player").GetComponent<Player>();
+        if (Tutorial)
+        {
+            TutMan = GameObject.Find("TutorialObjects").GetComponent<TutorialManager>();
+            SpaceBar = this.transform.FindChild("SpaceBar").GetComponent<SpriteRenderer>();
+            SpaceBar.enabled = false;
+        }
 
         GameObject RecordObj = GameObject.FindGameObjectWithTag("Recorder");
         TextRecorder = RecordObj.GetComponent<PlayerRecorder>();
@@ -59,6 +67,8 @@ public class Bush : MonoBehaviour {
             AlphaFade = 0;
 
             SetAnimal();
+            if (Tutorial)
+                SpaceBar.enabled = true;
             //Image.enabled = true;
         }
     }
@@ -73,13 +83,18 @@ public class Bush : MonoBehaviour {
             StartTime = Time.time;
             AlphaFade = 1.0f;
             CheckMissedBush();
+            if (Tutorial)
+            {
+                SpaceBar.enabled = false;
+                TutMan.F_BushUsed();
+            }
             //Image.enabled = true;
         }
     }
 
     void CheckMissedBush()
     {
-        if (!Fox && !BushUsed)
+        if (!Fox && !BushUsed &&!Tutorial)
         {
             int cat = 1;
             Player.MissedCats++;
@@ -126,24 +141,44 @@ public class Bush : MonoBehaviour {
     }
 
     void SetAnimal() {
-        Playa.f_UpdateScore();
-        Playa.f_CheckPercent();
-
-        int RandomNumber= Random.Range(0, 100);
-        //Debug.Log(RandomNumber + "Random Number");
-        if (RandomNumber <= BushManager.KittenPercent )
-        {// cat= right 
-            f_setAnimal(BushMan.Cat);
-            Fox = false;
-            Player.CurrentCats++;
-            //Debug.Log(RandomNumber+ "set cat");
-        }
-        else 
+        // the following case is for the regular Bushes
+        if (!Tutorial)
         {
-            f_setAnimal(BushMan.Fox);
-            Fox = true;
-            Player.CurrentFox++;
+            Playa.f_UpdateScore();
+            Playa.f_CheckPercent();
+
+            int RandomNumber = Random.Range(0, 100);
+            //Debug.Log(RandomNumber + "Random Number");
+            if (RandomNumber <= BushManager.KittenPercent)
+            {// cat= right 
+                f_setAnimal(BushMan.Cat);
+                Fox = false;
+                Player.CurrentCats++;
+                //Debug.Log(RandomNumber+ "set cat");
+            }
+            else
+            {
+                f_setAnimal(BushMan.Fox);
+                Fox = true;
+                Player.CurrentFox++;
+            }
         }
+        // the following case is for the tutorial Bushes
+        else
+        {
+            Debug.Log(Fox);
+            if (!Fox){
+               f_setAnimal(BushMan.Cat);
+                Fox = false;
+                //Debug.Log(RandomNumber+ "set cat");
+            }
+            else
+            {
+                f_setAnimal(BushMan.Fox);
+                Fox = true;
+            }
+        }
+
 
     }
 }

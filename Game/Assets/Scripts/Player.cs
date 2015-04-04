@@ -63,8 +63,13 @@ public class Player : MonoBehaviour {
     void ButtonPress() {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (hitBush){
-                BushCheck();
+            if (hitBush)
+            {
+                if (!CurrentBush.Tutorial)
+                    BushCheck();
+                else
+                    CurrentBush.f_AnimalFound();
+
                 hitBush = false;
             }
 
@@ -101,7 +106,7 @@ public class Player : MonoBehaviour {
     void OnTriggerEnter(Collider hit)
     {
         //Debug.Log(hit.name);
-        if (hit.gameObject.tag == "Bush")
+        if (hit.gameObject.tag == "Bush" || hit.gameObject.tag == "TutBush")
         {
             hitBush=true;
             CurrentBush = hit.gameObject.GetComponent<Bush>();
