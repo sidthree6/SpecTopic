@@ -17,6 +17,7 @@ public class Player : MonoBehaviour {
     private RawImage LevelComplete;
     private BushManager BushMan;
     private GameObject ResetButton;
+    private TutorialManager TUTMAN;
     private MeanReactionTime AvgReactTime;
     private PlayerRecorder TextRecorder;
     private CSVExporter ExcelExporter;
@@ -49,6 +50,7 @@ public class Player : MonoBehaviour {
         GameObject RecordObj = GameObject.FindGameObjectWithTag("Recorder");
         TextRecorder = RecordObj.GetComponent<PlayerRecorder>();
         ExcelExporter = RecordObj.GetComponent<CSVExporter>();
+        TUTMAN = GameObject.Find("TutorialObjects").GetComponent<TutorialManager>();
 	}
 	
 	// Update is called once per frame
@@ -148,6 +150,7 @@ public class Player : MonoBehaviour {
         LevelComplete.enabled = false;
         ResetButton.SetActive(false);
         BushMan.f_ResettingBushes();
+        TUTMAN.f_ResetImages();
     }
 
 
